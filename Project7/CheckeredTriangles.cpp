@@ -1,7 +1,3 @@
-// This application is a trivial illustration of texture mapping.  It draws
-// several triangles, each with a texture mapped on to it.  The same texture
-// is used for each triangle, but the mappings vary quite a bit so it looks as
-// if each triangle has a different texture.
 
 #ifdef __APPLE_CC__
 #include <GLUT/glut.h>
@@ -10,14 +6,20 @@
 #endif
 #include <cstdlib>
 
-// Define a 2 x 2 red and yellow checkered pattern using RGB colors.
 #define red {0xff, 0x00, 0x00}
 #define yellow {0xff, 0xff, 0x00}
 #define magenta {0xff, 0, 0xff}
+
 GLubyte texture[][3] = {
     red, yellow,
     yellow, red,
 };
+
+// Variables for rotation, movement, and zoom
+float angle = 0.0f;
+bool spinning = true;
+float zoom = 1.0f;
+float moveX = 0.0f, moveY = 0.0f;
 
 // Fixes up camera and remaps texture when window reshaped.
 void reshape(int width, int height) {
@@ -42,11 +44,16 @@ void reshape(int width, int height) {
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 }
 
-// Draws three textured triangles.  Each triangle uses the same texture,
-// but the mappings of texture coordinates to vertex coordinates is
-// different in each triangle.
+// Draws textured triangles with applied transformations (rotation, movement, and zoom).
 void display() {
   glClear(GL_COLOR_BUFFER_BIT);
+  glLoadIdentity();
+  
+  // Apply transformations
+  glTranslatef(moveX, moveY, -5.0f); // Move triangles
+  glScalef(zoom, zoom, zoom);        // Zoom in/out
+  glRotatef(angle, 0.0f, 0.0f, 1.0f); // Rotate the triangles
+  
   glBegin(GL_TRIANGLES);
     glTexCoord2f(0.5, 1.0);    glVertex2f(-3, 3);
     glTexCoord2f(0.0, 0.0);    glVertex2f(-3, 0);
@@ -60,7 +67,50 @@ void display() {
     glTexCoord2f(0.0, 0.0);    glVertex2f(-1.5, -3);
     glTexCoord2f(4, 0.0);      glVertex2f(1.5, -3);
   glEnd();
+
   glFlush();
+}
+
+void update(int value) {
+  if (spinning) {
+    angle -= 2.0f;  // Increase the angle for rotation
+    if (angle > 360) {
+      angle -= 360;
+    }
+  }
+  glutPostRedisplay();  // Redisplay the scene with the new rotation
+  glutTimerFunc(16, update, 0);  // 60 frames per second
+}
+
+// Handles keyboard input for controls
+void handleKeys(unsigned char key, int x, int y) {
+  switch (key) {
+    case 'p':  // Pause spinning
+      spinning = false;
+      break;
+    case 'c':  // Continue spinning
+      spinning = true;
+      break;
+    case 'u':  // Move up
+      moveY += 0.1f;
+      break;
+    case 'd':  // Move down
+      moveY -= 0.1f;
+      break;
+    case 'l':  // Move left
+      moveX -= 0.1f;
+      break;
+    case 'r':  // Move right
+      moveX += 0.1f;
+      break;
+    case '+':  // Zoom in
+      zoom += 0.1f;
+      break;
+    case '-':  // Zoom out
+      zoom -= 0.1f;
+      break;
+  }
+  glutPostRedisplay();
 }
 
 // Initializes GLUT and enters the main loop.
@@ -69,7 +119,12 @@ int main(int argc, char** argv) {
   glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
   glutInitWindowSize(520, 390);
   glutCreateWindow("Textured Triangles");
+  
   glutDisplayFunc(display);
   glutReshapeFunc(reshape);
+  glutKeyboardFunc(handleKeys);  // Register keyboard handler
+  glutTimerFunc(16, update, 0);  // Start the update loop
+  
   glutMainLoop();
+  return 0;
 }

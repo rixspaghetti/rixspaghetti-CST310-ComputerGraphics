@@ -25,7 +25,7 @@ CXX := g++
 CXXFLAGS := -std=c++11 $(INCLUDES)
 
 # source files
-SRC := CheckeredTriangles2.cpp ./glad/src/glad.c
+SRC := CheckeredTriangles.cpp ./glad/src/glad.c
 SRC2 := ColorCubeFlyby.cpp ./glad/src/glad.c
 
 
