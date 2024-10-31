@@ -1,4 +1,4 @@
-
+// g++ -o checkered  CheckeredTriangles2.cpp -lGL -lGLEW -lglfw -lGLU -lglut
 #ifdef __APPLE_CC__
 #include <GLUT/glut.h>
 #else
