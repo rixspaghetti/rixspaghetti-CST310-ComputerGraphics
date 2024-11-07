@@ -3,7 +3,7 @@
 # Ricardo Escarcega, Atuharie Ambala
 # Professor Ricardo Citro
 # CST310: Computer Graphics
-# 11/03/2024
+# 11/06/2024
 
 
 This project demonstrates 3D animation, lighting, and user interaction using OpenGL. It consists of two programs, CheckeredTriangles and ColorCubeFlyby, each focusing on different aspects of OpenGL functionalities like rotation, lighting effects, and keyboard-controlled interactivity.
@@ -27,13 +27,13 @@ sudo apt-get install libglew-dev libglfw3-dev libglm-dev
 ## Running the Program
 
 To compile and run the CheckeredTriangles program, use the following command structure in your terminal:
-g++ -o checkered CheckeredTriangles.cpp -lGL -lGLEW -lglfw -lGLU -lglut
+g++ -o checkered CheckeredTriangles2.cpp -lGL -lGLEW -lglfw -lGLU -lglut
 
 Then, run the compiled program:
 ./checkered
 
 For ColorCubeFlyby, follow a similar compilation process, modifying the filename accordingly:
-g++ -o cubes ColorCubeFlyby.cpp -lGL -lGLEW -lglfw -lGLU -lglut
+g++ -o cubes ColorCubeFlyby2.cpp -lGL -lGLEW -lglfw -lGLU -lglut
 ./cubes
 
 Keyboard Controls
@@ -80,7 +80,6 @@ Essential functions for rendering, input handling, and transformations were iden
 Shader configurations and lighting calculations were examined to understand the Phong model’s implementation.
 #### Testing and Documentation: 
 Each feature was tested and documented to ensure functionality and enhance code readability.
-
 
 
 

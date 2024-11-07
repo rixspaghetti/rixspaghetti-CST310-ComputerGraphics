@@ -25,8 +25,8 @@ CXX := g++
 CXXFLAGS := -std=c++11 $(INCLUDES)
 
 # source files
-SRC := CheckeredTriangles.cpp ./glad/src/glad.c
-SRC2 := ColorCubeFlyby.cpp ./glad/src/glad.c
+SRC := CheckeredTriangles2.cpp ./glad/src/glad.c
+SRC2 := ColorCubeFlyBy2.cpp ./glad/src/glad.c
 
 
 
@@ -57,3 +57,6 @@ run: compile
 clean: 
 	rm -f $(OUT)
 	rm -f $(OUT2)
+
+
+#./$(OUT)
