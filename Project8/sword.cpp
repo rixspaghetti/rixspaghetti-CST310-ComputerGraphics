@@ -15,19 +15,19 @@ void init() {
 
 // Function to draw a curved blade
 void drawCurvedBlade() {
-    int segments = 50;               // Number of segments for the curve
-    float bladeLength = 11.0;         // Total length of the blade
-    float curveFactor = 0.0015;        // Adjust for curvature
+    int segments = 80;               // Number of segments for the curve
+    float bladeLength = 12.0;         // Total length of the blade
+    float curveFactor = 0.00035;        // Adjust for curvature
     float segmentLength = bladeLength / segments;
     
     glPushMatrix();
-    glTranslatef(1.5, -9.0, -3.0);   // Lower the starting position of the sword
+    glTranslatef(1.7, -10.0, -3.0);   // Lower the starting position of the sword
     glRotatef(13, 0.0, 0.0, 1.0);   // Tilt sword to match the image
 
     for (int i = 0; i < segments; i++) {
         glPushMatrix();
         glTranslatef(0.0, i * segmentLength, curveFactor * i * i); // Create slight curve
-        glScalef(0.1, segmentLength, 0.1);                         // Scale each segment
+        glScalef(0.25, segmentLength, 0.5);                         // Scale each segment
         glutSolidCube(1.0);                                        // Draw each segment
         glPopMatrix();
     }
