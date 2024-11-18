@@ -25,10 +25,10 @@ CXX := g++
 CXXFLAGS := -std=c++11 $(INCLUDES)
 
 # source files
-SRC := sword.cpp ./glad/src/glad.c
+SRC := scene.cpp ./glad/src/glad.c
 
 # Output file
-OUT := sword  
+OUT := scene  
 
 all: install=-dependencies compile 
 
