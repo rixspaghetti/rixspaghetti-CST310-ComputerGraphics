@@ -1,3 +1,4 @@
+// g++ main.cpp -o scene -std=c++11 -w -I/opt/homebrew/opt/glew/include -I/opt/homebrew/include -L/opt/homebrew/opt/glew/lib -L/opt/homebrew/lib -lSOIL -lGLEW -lglfw -lassimp -framework OpenGL -framework GLUT
 #include <iostream>  // iostream include
 
 // GLEW

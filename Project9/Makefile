@@ -1,36 +1,36 @@
 # Cross platform settings
 OS := $(shell uname)
 ifeq ($(OS), Linux)
-	LIBS := -lGL -lGLEW -lglfw -lGLU -lglut -lassimp
+	LIBS := -lGL -lGLEW -lglfw -lGLU -lglut
 	INCLUDES := -I/usr/include 
 	LINKFLAGS := -L/usr/lib 
 	INSTALL := sudo apt-get install -y
-	PKG := glew glfw glut assimp
+	PKG := glew glfw glut
 else ifeq ($(OS), Darwin) # macOS
-	LIBS := -lglew -lglfw -lglut -framework OpenGL -L/Users/rix/SOIL -L/opt/homebrew/lib -lassimp
-	INCLUDES := -I/opt/homebrew/include -I/Users/rix/glad/include -I/Users/rix/SOIL/src
-	LINKFLAGS := -L/opt/homebrew/lib -arch i386 -arch x86_64 -arch arm64
+	LIBS := -lglew -lglfw -lglut -framework OpenGL
+	INCLUDES := -I/opt/homebrew/include -I./SOIL 
+	LINKFLAGS := -L/opt/homebrew/lib
 	INSTALL := brew install
-	PKG := glew glfw assimp
+	PKG := glew glfw
 else ifeq ($(OS), Windows_NT)
-	LIBS := -lopengl32 -lglfw3 -lgdi32 -lassimp
-	INCLUDES := -I/Users/rix/glad/include -I/Users/rix/SOIL/src
+	LIBS := -lopengl32 -lglfw3 -lgdi32
+	INCLUDES := -I./glad/include -I./SOIL
 	LINKFLAGS := -L./glfw/lib -L./glew/lib
 	INSTALL := vcpkg install
-	PKG := glew glfw3 assimp
+	PKG := glew glfw3
 endif
 
 # Compiler and flags
 CXX := g++
-CXXFLAGS := -std=c++11 $(INCLUDES) -arch i386 -arch x86_64 -arch arm64
+CXXFLAGS := -std=c++11 $(INCLUDES)
 
-# Source files
-SRC := main.cpp /Users/rix/glad/src/glad.c
+# source files
+SRC := main.cpp 
 
 # Output file
 OUT := main  
 
-all: install-dependencies compile 
+all: install=-dependencies compile 
 
 install-dependencies:
 ifeq ($(OS), Linux)
@@ -49,3 +49,6 @@ run: compile
 	
 clean: 
 	rm -f $(OUT)
+
+
+#./$(OUT)
